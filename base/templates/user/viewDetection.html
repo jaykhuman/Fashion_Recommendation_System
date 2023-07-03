@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Fashion Recommendation System</title>
+    <!-- base:css -->
+    <link rel="stylesheet"
+          href="../../static/adminResourses/css/materialdesignicons.min.css">
+    <link rel="stylesheet"
+          href="../../static/adminResourses/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <link rel="stylesheet"
+          href="../../static/adminResourses/css/dataTables.bootstrap4.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../../static/adminResourses/css/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="../../static/adminResourses/images/3.png"/>
+</head>
+
+<body class="sidebar-light">
+<div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->R̥
+
+    {% include 'user/header.html' %}
+
+
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_settings-panel.html -->
+        {% include 'user/menu.html' %}
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="card">
+                    <div class="card-header custom-card-header">
+                        <h4 class="card-title mb-0 text-white">History</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table id="order-listing" class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Input Images</th>
+                                            <th>Recommendations</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for row in detection_vo_list %}
+                                            <tr>
+                                                <td>
+                                                    <a href="{{ row['detection_input_file'] }}">
+                                                        <img src="{{ row['detection_input_file'] }}"
+                                                             alt="">
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    {% for index in  row['detection_output_file'] %}
+                                                        <a href="{{ index }}">
+                                                            <img src="{{ index }}"
+                                                                 alt="" style="border-radius: 0;float: left;margin-left:
+                                                        10px">
+                                                        </a>
+                                                    {% endfor %}
+                                                </td>
+                                                <td>
+
+                                                        <a
+                                                           href="/user/deletedetection?detection_id={{ row['detection_id'] }}">
+                                                            <i class="mdi
+                                                            mdi-delete lead
+                                                            text-danger"></i>
+                                                        </a>
+
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:../../partials/_footer.html -->
+            {% include 'user/footer.html' %}
+            <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+<!-- base:js -->
+<script src="../../static/adminResourses/js/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- inject:js -->
+<script src="../../static/adminResourses/js/off-canvas.js"></script>
+<script src="../../static/adminResourses/js/hoverable-collapse.js"></script>
+<script src="../../static/adminResourses/js/template.js"></script>
+<script src="../../static/adminResourses/js/settings.js"></script>
+<script src="../../static/adminResourses/js/todolist.js"></script>
+<!-- endinject -->
+<!-- plugin js for this page -->
+<script src="../../static/adminResourses/js/jquery.dataTables.js"></script>
+<script src="../../static/adminResourses/js/dataTables.bootstrap4.js"></script>
+<!-- End plugin js for this page -->
+<!-- Custom js for this page-->
+<script src="../../static/adminResourses/js/data-table.js"></script>
+<!-- End custom js for this page-->
+</body>
+
+</html>

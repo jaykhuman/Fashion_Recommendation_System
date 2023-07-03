@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Fashion Recommendation System</title>
+    <!-- base:css -->
+    <link rel="stylesheet"
+          href="../../static/adminResourses/css/materialdesignicons.min.css">
+    <link rel="stylesheet"
+          href="../../static/adminResourses/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    {#<link rel="stylesheet"
+          href="../../static/adminResourses/css/dataTables.bootstrap4.css">#}
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../../static/adminResourses/css/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon"
+          href="../../static/adminResourses/images/3.png"/>
+</head>
+
+<body class="sidebar-light">
+<div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->R̥
+
+    {% include 'admin/header.html' %}
+
+
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_settings-panel.html -->
+        {% include 'admin/menu.html' %}
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="card">
+                    <div class="card-header custom-card-header">
+                        <h4 class="card-title mb-0 text-white">
+                            Manage History</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <select class="form-control"
+                                            onchange="showHistory()"
+                                            value="loginId" id="loginId">
+                                    <option disabled selected>Select
+                                        User</option>
+                                        {% for login in login_vo_list %}
+                                            {#                                        <option disabled selected></option>#}
+                                            <option
+                                                    value="{{ login['login_id'] }}">{{ login['login_username'] }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="table-responsive">
+                                    <table id="historyTable"
+                                           style="display: none"
+                                           class="table">
+
+                                        <thead>
+                                        <tr>
+
+                                            <th>Input Image</th>
+                                            <th>Output Image</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tbody">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:../../partials/_footer.html -->
+            <footer class="footer">
+                <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2019 <a
+                            href="www.urbanui.com">Urbanui</a>. All rights reserved. Terms of use | Privacy Policy</span>
+                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with Love</span>
+                </div>
+            </footer>
+            <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+<!-- base:js -->
+<script src="../../static/adminResourses/js/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- inject:js -->
+<script src="../../static/adminResourses/js/off-canvas.js"></script>
+<script src="../../static/adminResourses/js/hoverable-collapse.js"></script>
+<script src="../../static/adminResourses/js/template.js"></script>
+<script src="../../static/adminResourses/js/settings.js"></script>
+<script src="../../static/adminResourses/js/todolist.js"></script>
+<!-- endinject -->
+<!-- plugin js for this page -->
+{#<script src="../../static/adminResourses/js/jquery.dataTables.js"></script>
+<script src="../../static/adminResourses/js/dataTables.bootstrap4.js"></script>#}
+<!-- End plugin js for this page -->
+<!-- Custom js for this page-->
+<script src="../../static/adminResourses/js/data-table.js"></script>
+<!-- End custom js for this page-->
+
+<script>
+    function showHistory() {
+        var loginId = document.getElementById("loginId");
+        var historyTable = document.getElementById("historyTable");
+        historyTable.style.display = "";
+        var ajax = new XMLHttpRequest();
+
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState === 4) {
+                var jsn = JSON.parse(ajax.responseText);
+
+                var tbodyResponce = "";
+
+                for (var i = 0; i < jsn.length; i++) {
+
+                    var outputList = jsn[i].detection_output_file.split(",");
+
+                    console.log(outputList);
+
+
+                    tbodyResponce += '<tr>';
+                    tbodyResponce += '<td>';
+                    tbodyResponce += '<img style="border-radius: 0;height: ' +
+                        '75px;width: 75px;" src=' + jsn[i].detection_input_file + '>';
+                    tbodyResponce += '</td>';
+                    tbodyResponce += '<td>';
+
+                    for (var j = 0; j < outputList.length; j++) {
+                        tbodyResponce += '<img style="border-radius: 0;' +
+                            'height:75px;width: 75px;' +
+                            '" src="' + outputList[j] + '">';
+                    }
+                    tbodyResponce += '<td>';
+                    tbodyResponce += '</tr>';
+                }
+
+                document.getElementById("tbody").innerHTML = tbodyResponce;
+            }
+        };
+
+        ajax.open("get", "/admin/ajax_view_user?loginId=" + loginId.value, true);
+        ajax.send();
+
+    }
+</script>
+</body>
+
+</html>

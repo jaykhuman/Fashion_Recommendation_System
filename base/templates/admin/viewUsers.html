@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Fashion Recommendation System</title>
+    <!-- base:css -->
+    <link rel="stylesheet"
+          href="../../static/adminResourses/css/materialdesignicons.min.css">
+    <link rel="stylesheet"
+          href="../../static/adminResourses/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <link rel="stylesheet"
+          href="../../static/adminResourses/css/dataTables.bootstrap4.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../../static/adminResourses/css/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon"
+          href="../../static/adminResourses/images/3.png"/>
+</head>
+
+<body class="sidebar-light">
+<div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->R̥
+
+    {% include 'admin/header.html' %}
+
+
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_settings-panel.html -->
+
+
+        {% include 'admin/menu.html' %}
+
+
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="card">
+                    <div class="card-header custom-card-header">
+                        <h4 class="card-title mb-0 text-white">
+                            Manage User</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table id="order-listing" class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>User Name</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for row in
+                                            view_history_list_2 %}
+                                            {% for log in view_history_list_1 %}
+                                                {% if log["login_id"]==row["register_login_id"] %}
+                                                    <tr>
+                                                    <td>    {{ log['login_username'] }}</td>
+
+                                                    <td>{{ row['register_firstname'] }}</td>
+                                                    <td>{{ row['register_lastname'] }}</td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        <td>
+                                            <label class="badge badge-success">Active</label>
+                                        </td>
+                                        <td>
+                                            <button class="btn
+                                            btn-outline-danger d-flex">
+                                                <i class="mdi mdi-block-helper"></i>
+                                                <span class="ml-1">Disable</span>
+                                            </button>
+                                        </td>
+                                        </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:../../partials/_footer.html -->
+            <footer class="footer">
+                <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2019 <a
+                            href="www.urbanui.com">Urbanui</a>. All rights reserved. Terms of use | Privacy Policy</span>
+                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with Love</span>
+                </div>
+            </footer>
+            <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+<!-- base:js -->
+<script src="../../static/adminResourses/js/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- inject:js -->
+<script src="../../static/adminResourses/js/off-canvas.js"></script>
+<script src="../../static/adminResourses/js/hoverable-collapse.js"></script>
+<script src="../../static/adminResourses/js/template.js"></script>
+<script src="../../static/adminResourses/js/settings.js"></script>
+<script src="../../static/adminResourses/js/todolist.js"></script>
+<!-- endinject -->
+<!-- plugin js for this page -->
+<script src="../../static/adminResourses/js/jquery.dataTables.js"></script>
+<script src="../../static/adminResourses/js/dataTables.bootstrap4.js"></script>
+<!-- End plugin js for this page -->
+<!-- Custom js for this page-->
+<script src="../../static/adminResourses/js/data-table.js"></script>
+<!-- End custom js for this page-->
+</body>
+
+</html>
